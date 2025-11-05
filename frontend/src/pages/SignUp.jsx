@@ -57,7 +57,7 @@ function SignUp() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="input"
-                        placeholder="ruparamyasri@gmail.com"
+                        // placeholder="ruparamyasri@gmail.com"
                       />
                     </div>
                   </div>

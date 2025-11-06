@@ -14,7 +14,25 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT || 3000;
 
 app.use(express.json({ limit: "5mb" })); // req.body
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+// app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://chatify-frontend-rr8b.onrender.com"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
